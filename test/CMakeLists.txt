@@ -6,23 +6,40 @@ include_directories(${BAKGE_SOURCE_DIR}/include)
 include_directories(${BAKGE_SOURCE_DIR}/lib/glfw-2.7.9/include)
 
 set(TESTS
-  window
-  types
-  texture
   glfw
+  texture
+  types
+  window
 )
 
 if(UNIX)
   find_package(GLFW REQUIRED)
+  find_package(X11 REQUIRED)
   set(CORELIBS
     ${GLFW_LIBRARY}
     m
-    X11
-    Xrandr
+    ${X11_X_PRE_LIBS}
+    ${X11_LIBRARIES}
+    ${X11_X_EXTRA_LIBRARIES}
     GL
     GLU
   )
 endif(UNIX)
+
+
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  find_package(GLFW REQUIRED)
+  find_package(X11 REQUIRED)
+  set(CORELIBS
+    ${GLFW_LIBRARY}
+    m
+    ${X11_X_PRE_LIBS}
+    ${X11_LIBRARIES}
+    ${X11_X_EXTRA_LIBRARIES}
+    GL
+    GLU
+  )
+endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 
 if(WIN32)
@@ -41,6 +58,6 @@ endif(WIN32)
 
 
 foreach(test ${TESTS})
-  add_executable(${test} ${test}.cpp $<TARGET_OBJECTS:BAKGE>)
-  target_link_libraries(${test} ${CORELIBS})
+  add_executable(${test} ${test}.cpp)
+  target_link_libraries(${test} ${CORELIBS} bakge)
 endforeach(test)
