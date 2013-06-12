@@ -22,36 +22,25 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_OSX_WINDOW_H
-#define BAKGE_WINDOW_OSX_WINDOW_H
+#ifndef BAKGE_GRAPHICS_SHAPE_H
+#define BAKGE_GRAPHICS_SHAPE_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-typedef class osx_Window
+class Shape : public Node
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
-
-    osx_Window();
-
 
 public:
 
-    ~osx_Window();
+    Shape();
+    ~Shape();
 
-    BGE_FACTORY osx_Window* Create(int Width, int Height);
-
-    bool IsOpen();
-
-    Result Close();
-
-    Result SwapBuffers();
-
-} Window; /* osx_Window */
+}; /* Shape */
 
 } /* bakge */
 
-#endif /* BAKGE_WINDOW_OSX_WINDOW_H */
+#endif /* BAKGE_GRAPHICS_SHAPE_H */
+

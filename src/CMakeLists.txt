@@ -13,7 +13,11 @@ set(MODULES
   core/EventHandler
   core/Renderer
   core/Utility
+  graphics/Mesh
   graphics/Texture
+  graphics/Shader
+  graphics/Shape
+  graphics/Node
   math/Vector4
   renderer/FrontRenderer
 )
@@ -32,7 +36,7 @@ endif()
 
 set(PLATFORM_MODULES
   window/${PLATFORM_PREFIX}_Window
-  core/${PLATFORM_PREFIX}_Utility
+  utility/${PLATFORM_PREFIX}_Utility
 )
 
 add_library(bakge ${MODULES} ${PLATFORM_MODULES})

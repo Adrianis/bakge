@@ -22,36 +22,31 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_OSX_WINDOW_H
-#define BAKGE_WINDOW_OSX_WINDOW_H
+#ifndef BAKGE_GRAPHICS_SHADER_H
+#define BAKGE_GRAPHICS_SHADER_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-typedef class osx_Window
+class Shader : public Bindable
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
-
-    osx_Window();
-
 
 public:
 
-    ~osx_Window();
+    Shader();
+    ~Shader();
 
-    BGE_FACTORY osx_Window* Create(int Width, int Height);
+    /* *
+     * Loads the vertex and fragment shaders from provided paths.
+     * If either fails to load or compile, shader creation fails.
+     * */
+    BGE_FACTORY Shader* Create(const char* VertexPath, const char* FragPath);
 
-    bool IsOpen();
-
-    Result Close();
-
-    Result SwapBuffers();
-
-} Window; /* osx_Window */
+}; /* Shader */
 
 } /* bakge */
 
-#endif /* BAKGE_WINDOW_OSX_WINDOW_H */
+#endif /* BAKGE_GRAPHICS_SHADER_H */
+

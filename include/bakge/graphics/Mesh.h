@@ -22,20 +22,25 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_GRAPHICS_MESH_H
+#define BAKGE_GRAPHICS_MESH_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-Result Init(int argc, char* argv[])
+class Mesh : public Drawable
 {
-    return BGE_FAILURE;
-}
 
+public:
 
-Result Deinit()
-{
-    return BGE_FAILURE;
-}
+    Mesh();
+    ~Mesh();
+
+}; /* Mesh */
 
 } /* bakge */
+
+#endif /* BAKGE_GRAPHICS_MESH_H */
+
