@@ -22,36 +22,40 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_OSX_WINDOW_H
-#define BAKGE_WINDOW_OSX_WINDOW_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-typedef class osx_Window
+Node::Node()
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
-
-    osx_Window();
+}
 
 
-public:
+Node::~Node()
+{
+}
 
-    ~osx_Window();
 
-    BGE_FACTORY osx_Window* Create(int Width, int Height);
+Result Node::Bind() const
+{
+    return BGE_FAILURE;
+}
 
-    bool IsOpen();
 
-    Result Close();
+Result Node::Unbind() const
+{
+    return BGE_FAILURE;
+}
 
-    Result SwapBuffers();
 
-} Window; /* osx_Window */
+Result Node::Draw() const
+{
+    glBegin(GL_POINTS);
+    glVertex3f(0, 0, 0); /* Pass position in */
+    glEnd();
+    return BGE_SUCCESS;
+}
 
 } /* bakge */
 
-#endif /* BAKGE_WINDOW_OSX_WINDOW_H */

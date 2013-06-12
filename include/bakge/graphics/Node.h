@@ -22,36 +22,35 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_OSX_WINDOW_H
-#define BAKGE_WINDOW_OSX_WINDOW_H
+#ifndef BAKGE_GRAPHICS_NODE_H
+#define BAKGE_GRAPHICS_NODE_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-typedef class osx_Window
+class Node : public Drawable
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
-
-    osx_Window();
-
 
 public:
 
-    ~osx_Window();
+    Node();
+    ~Node();
 
-    BGE_FACTORY osx_Window* Create(int Width, int Height);
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
 
-    bool IsOpen();
+    virtual Result Draw() const;
 
-    Result Close();
 
-    Result SwapBuffers();
+protected:
 
-} Window; /* osx_Window */
+    math::Vector4 Position;
+
+}; /* Node */
 
 } /* bakge */
 
-#endif /* BAKGE_WINDOW_OSX_WINDOW_H */
+#endif /* BAKGE_GRAPHICS_NODE_H */
+

@@ -22,36 +22,25 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_OSX_WINDOW_H
-#define BAKGE_WINDOW_OSX_WINDOW_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-typedef class osx_Window
+Shader::Shader()
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
-
-    osx_Window();
+}
 
 
-public:
+Shader::~Shader()
+{
+}
 
-    ~osx_Window();
 
-    BGE_FACTORY osx_Window* Create(int Width, int Height);
-
-    bool IsOpen();
-
-    Result Close();
-
-    Result SwapBuffers();
-
-} Window; /* osx_Window */
+Shader* Shader::Create(const char* VertexPath, const char* FragPath)
+{
+    return NULL;
+}
 
 } /* bakge */
 
-#endif /* BAKGE_WINDOW_OSX_WINDOW_H */
