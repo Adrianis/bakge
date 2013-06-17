@@ -22,44 +22,24 @@
  * THE SOFTWARE.
  * */
 
-#import <cocoa/Cocoa.h>
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-osx_Window::~osx_Window()
+osx_Thread::osx_Thread()
 {
 }
 
 
-osx_Window::osx_Window()
+osx_Thread::~osx_Thread()
 {
 }
 
 
-osx_Window* osx_Window::Create(int Width, int Height)
+osx_Thread* osx_Thread::Create(int (*EntryFunc)(void*), void* Data)
 {
     return NULL;
-}
-
-
-bool osx_Window::IsOpen()
-{
-    return false;
-}
-
-
-Result osx_Window::Close()
-{
-    return BGE_FAILURE;
-}
-
-
-Result osx_Window::SwapBuffers()
-{
-    return BGE_FAILURE;
 }
 
 } /* bakge */

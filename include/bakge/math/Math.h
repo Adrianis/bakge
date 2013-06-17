@@ -1,18 +1,18 @@
 /* *
  * The MIT License (MIT)
- * 
+ *
  * Copyright (c) 2013 Paul Holden et al. (See AUTHORS)
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,36 +22,36 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_OSX_WINDOW_H
-#define BAKGE_WINDOW_OSX_WINDOW_H
+#ifndef BAKGE_MATH_MATH_H
+#define BAKGE_MATH_MATH_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
-
-typedef class osx_Window
+namespace math
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
 
-    osx_Window();
+#define SCALAR_EPSILON 0.000001
+#define RAD_PER_DEG 0.0174532925f
+#define DEG_PER_RAD 57.2957795f
+typedef float Scalar;
+typedef Scalar Degrees;
+typedef Scalar Radians;
 
 
-public:
+inline Radians ToRadians(Degrees BGE_NCP Deg)
+{
+    return (Deg * RAD_PER_DEG);
+}
 
-    ~osx_Window();
 
-    BGE_FACTORY osx_Window* Create(int Width, int Height);
+inline Degrees ToDegrees(Radians BGE_NCP Rad)
+{
+    return (Rad * DEG_PER_RAD);
+}
 
-    bool IsOpen();
-
-    Result Close();
-
-    Result SwapBuffers();
-
-} Window; /* osx_Window */
-
+} /* math */
 } /* bakge */
 
-#endif /* BAKGE_WINDOW_OSX_WINDOW_H */
+#endif /* BAKGE_MATH_MATH_H */

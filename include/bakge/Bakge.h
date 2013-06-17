@@ -1,18 +1,18 @@
 /* *
  * The MIT License (MIT)
- * 
+ *
  * Copyright (c) 2013 Paul Holden et al. (See AUTHORS)
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,7 +32,7 @@
 #include <math.h>
 
 /* GCC-only attributes */
-#ifdef __GNUC__
+#if defined __GNUC__ || defined __clang__
 /* Send compiler warning if function return result is not used */
 #define BGE_WUNUSED __attribute__((warn_unused_result))
 /* Mark a variable as possibly unused in its function  */
@@ -54,6 +54,8 @@
 #define BGE_FACTORY static BGE_WUNUSED
 #define BGE_NCP const&
 
+#include <GLFW/glfw3.h>
+
 /* Include core Bakge classes (no OpenGL inclusion yet) */
 #include <bakge/core/Type.h>
 #include <bakge/core/Utility.h>
@@ -63,14 +65,25 @@
 #include <bakge/core/Engine.h>
 #include <bakge/core/Event.h>
 #include <bakge/core/EventHandler.h>
+#include <bakge/core/Window.h>
+
+/* System modules */
+#include <bakge/system/Clock.h>
 
 /* Math modules */
+#include <bakge/math/Math.h>
 #include <bakge/math/Vector4.h>
+#include <bakge/math/Matrix.h>
+#include <bakge/math/Quaternion.h>
+
+/* Data structure modules */
+#include <bakge/data/SingleNode.h>
+#include <bakge/data/LinkedList.h>
 
 /* Include API classes */
-#include <bakge/api/Window.h>
+#include <bakge/api/Thread.h>
 
-/* Platform headers (may depend on core Bakge classes; #includes OpenGL) */
+/* Platform headers (may depend on core Bakge classes) */
 #ifdef __linux__
 #include <bakge/platform/x11_Bakge.h>
 #elif defined(_WIN32)
@@ -81,10 +94,13 @@
 
 /* Additional Bakge classes (may depend on OpenGL) */
 #include <bakge/graphics/Node.h>
+#include <bakge/graphics/Pawn.h>
 #include <bakge/graphics/Shape.h>
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Shader.h>
 #include <bakge/graphics/Mesh.h>
+#include <bakge/renderer/DeferredGeometryRenderer.h>
+#include <bakge/renderer/DeferredLightingRenderer.h>
 #include <bakge/renderer/FrontRenderer.h>
 
 #endif /* BAKGE_BAKGE_H */
