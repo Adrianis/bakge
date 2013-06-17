@@ -22,36 +22,39 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_API_WINDOW_H
-#define BAKGE_API_WINDOW_H
+#ifndef BAKGE_EXAMPLE_SIMPLEENGINE_H
+#define BAKGE_EXAMPLE_SIMPLEENGINE_H
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <bakge/Bakge.h>
 
-namespace bakge
+class SimpleEngine : bakge::Engine
 {
-namespace api
-{
-
-class Window
-{
-
-protected:
-
-    Window();
-    
 
 public:
 
-    virtual ~Window();
+    SimpleEngine();
+    ~SimpleEngine();
 
-    virtual bool IsOpen() = 0;
-    virtual Result Close() = 0;
-    virtual Result PollEvent(Event* Ev) = 0;
-    virtual Result SwapBuffers() = 0;
+    bakge::Result Initialize();
+    bakge::Result ShutDown();
+    int Run();
 
-}; /* Window */
+    bakge::Result Update(bakge::Seconds DeltaTime);
 
-} /* api */
-} /* bakge */
+    bakge::Result PreRenderStage();
+    bakge::Result RenderStage();
+    bakge::Result PostRenderStage();
 
-#endif /* BAKGE_API_WINDOW_H */
+
+protected:
+
+    bakge::Window* AppWindow;
+    bakge::FrontRenderer* SceneRenderer;
+
+    GLUquadric* Quadric;
+
+};
+
+#endif /* BAKGE_EXAMPLE_SIMPLEENGINE_H */

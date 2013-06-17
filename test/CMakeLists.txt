@@ -2,58 +2,39 @@
 
 cmake_minimum_required(VERSION 2.6)
 
-include_directories(${BAKGE_SOURCE_DIR}/include)
+if(BAKGE_BUILD_SDK)
+  set(TESTS_SUBDIR "test")
+endif()
 
 set(TESTS
-  texture
-  types
-  window
+  clock
+  linkedlist
+  loadfile
+  matrix
   node
+  pawn
+  frontrenderer
+  quaternion
+  texture
+  thread
+  types
   vector4
+  window
 )
 
-if(UNIX)
-  find_package(X11 REQUIRED)
-  include_directories(${X11_INCLUDE_DIR})
-  link_directories(${X11_LIBRARY_DIR})
-  set(CORELIBS
-    m
-    ${X11_X_PRE_LIBS}
-    ${X11_LIBRARIES}
-    ${X11_X_EXTRA_LIBRARIES}
-    GL
-    GLU
-  )
-endif(UNIX)
+set(EXECUTABLE_OUTPUT_PATH ${BAKGE_SDK_TESTS_OUTPUT_PATH})
 
-
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  find_package(X11 REQUIRED)
-  include_directories(${X11_INCLUDE_DIR})
-  link_directories(${X11_LIBRARY_DIR})
-  set(CORELIBS
-    m
-    ${X11_X_PRE_LIBS}
-    ${X11_LIBRARIES}
-    ${X11_X_EXTRA_LIBRARIES}
-    GL
-    GLU
-  )
-endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-
-
-if(WIN32)
-  set(CORELIBS
-    opengl32.lib
-    gdi32.lib
-    user32.lib
-    glu32.lib
-    winmm.lib
-  )
-endif(WIN32)
-
-
-foreach(test ${TESTS})
-  add_executable(${test} ${test}.cpp)
-  target_link_libraries(${test} bakge ${CORELIBS})
-endforeach(test)
+if(NOT APPLE)
+  foreach(test ${TESTS})
+    add_executable(${test} ${test}.cpp)
+    target_link_libraries(${test} bakge ${BAKGE_LIBRARIES})
+  endforeach(test)
+else()
+  foreach(test ${TESTS})
+    add_executable(${test} MACOSX_BUNDLE ${test})
+    target_link_libraries(${test} bakge ${BAKGE_LIBRARIES})
+    set_target_properties(${test} PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME ${test})
+    set_target_properties(${test} PROPERTIES MACOSX_BUNDLE_SHORT_VERSION_STRING ${BAKGE_GLFW_VERSION}
+                                             MACOSX_BUNDLE_LONG_VERSION_STRING ${BAKGE_GLFW_VERSION_FULL})
+  endforeach(test)
+endif()
